@@ -25,4 +25,3 @@ for i in range(n):
         break
 
 print('%.2f' % profits)
-print()
