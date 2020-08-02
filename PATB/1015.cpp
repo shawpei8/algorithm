@@ -19,8 +19,9 @@ int main() {
     ios::sync_with_stdio(false);
     int N, L, H, M = 0;
     cin >> N >> L >> H;
-    Student studs[N];
+
     int id, de, cai;
+    Student studs[N];
     for (int i = 0; i < N; i++) {
         cin >> id >> de >> cai;
         studs[i].id = id;
