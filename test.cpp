@@ -2,6 +2,8 @@
 using namespace std;
 
 int main() {
-    printf("hello, world\n");
+    string a;
+    cin >> a;
+    cout << a << endl;
     return 0;
 }
