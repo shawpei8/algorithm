@@ -1,33 +1,16 @@
-n = input()
+a = input().split('E')
+sign = a[0][0]  # 符号
+s = a[0][1] + a[0][3:]  # 数字
+e = a[1]  # 指数
 
-doti = expi = 0
-for i in range(len(n)):
-    if n[i] == '.': doti = i
-    if n[i] == 'E': expi = i
+x = int(e) + 1
+if x <= 0:
+    s = '0' + '.' + '0' * (-x) + s
+elif x >= len(s):
+    s = s + '0' * (x - len(s))
+else:
+    s = s[0:x] + '.' + s[x:]
 
-num = (n[1:doti] if n[0] in '+-' else n[:doti]) + n[doti+1:expi]
-exp = (doti-1 if n[0] in '+-' else doti) + int(n[expi+1:])
-
-if n[0] == '-':
-    print('-', end='')
-if exp + doti <= 1:
-    print('0.', end='')
-e = exp
-while e < 0:
-    print('0', end='')
-    e += 1
-
-k = exp if exp > len(num) else len(num)
-for i in range(k):
-    if i < len(num):
-        if i != k-1:
-            print(num[i], end='')
-        else:
-            print(num[i])
-        if i == exp-1:
-            print('.', end='')
-    if i >= len(num):
-        if i != k-1:
-            print('0', end='')
-        else:
-            print('0')
+if sign == '-':
+    s = '-' + s
+print(s)

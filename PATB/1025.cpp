@@ -1,41 +1,32 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
-const int MAX = 100000;
-
-struct Node {
-    int data, next;
-} List[MAX];
-
-int reverseList(int start, int len, int k);
+const int MAX = 100001;
 
 int main() {
-    int start, N, K; 
+    int start, N, K, tmp;
     cin >> start >> N >> K;
 
-    int addr, data, next;
+    int data[MAX], next[MAX], List[MAX]; 
     for (int i = 0; i < N; i++) {
-        cin >> addr >> data >> next;
-        List[addr].data = data;
-        List[addr].next = next;
+        cin >> tmp;
+        cin >> data[tmp] >> next[tmp];
     }
 
-    int m = 0; // 实际链表长度
-    for (int i = start; i != -1; i = List[i].next) {
-        m++;
+    int cnt = 0; // 实际链表长度
+    while (start != -1) {
+        List[cnt++] = start;
+        start = next[start];
     }
 
-    int newStart = reverseList(start, m, K);
-    for (int i = newStart; i != -1; i = List[i].next) {
-        cout << i << ' ' << List[i].data << ' ' << List[i].next << endl;
+    for (int i = 0; i < (cnt - cnt % K); i += K) {
+        reverse(List + i, List + i + K);
     }
+
+    for (int i = 0; i < cnt - 1; i++) {
+        printf("%05d %d %05d\n", List[i], data[List[i]], List[i + 1]);
+    }
+    printf("%05d %d -1", List[cnt - 1], data[List[cnt - 1]]);
     return 0;
-}
-
-int reverseList(int start, int len, int k) {
-    int n = len / k;
-    int head, tail;
-    for (int i = 0; i < n; i++) {
-        
-    }
 }
